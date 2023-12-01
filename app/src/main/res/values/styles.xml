@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:checkboxStyle">@style/ConditionCheckbox</item>
+    </style>
+
+    <style name="ConditionCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">#704F38</item>
+    </style>
+</resources>
