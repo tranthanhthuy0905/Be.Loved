@@ -21,8 +21,15 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
 
-        TextView signupQ = (TextView) findViewById(R.id.signupQ);
-        signupQ.setOnClickListener(new View.OnClickListener() {
+        TextView otherOptions = (TextView) findViewById(R.id.otherOptions);
+        otherOptions.setText("------------Or sign in with------------");
+
+        TextView question = (TextView) findViewById(R.id.question);
+        question.setText("Don't have an account?");
+
+        TextView qAction = (TextView) findViewById(R.id.qAction);
+        qAction.setText("Sign Up");
+        qAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(SignIn.this, SignUp.class);
@@ -31,7 +38,8 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-        Button signInBtn = (Button) findViewById(R.id.signInBtn);
+        Button signInBtn = (Button) findViewById(R.id.navBtn);
+        signInBtn.setText("Sign In");
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

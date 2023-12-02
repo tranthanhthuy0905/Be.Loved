@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }}
         );
 
-        TextView loginQ = (TextView) findViewById(R.id.loginQ);
+        TextView loginQ = (TextView) findViewById(R.id.qAction);
         loginQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
