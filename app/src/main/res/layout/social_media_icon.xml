@@ -1,21 +1,16 @@
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="140dp"
+    android:layout_height="80dp"
+    android:padding="16dp"
+    android:gravity="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/othersignups">
 
-    <data>
-        <variable name="alignTop" type="android.R.id"/>
-    </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:padding="16dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@{alignTop}"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
         <ImageView
             android:id="@+id/googleicon"
             android:layout_width="40dp"
@@ -30,4 +25,3 @@
             android:src="@drawable/popular_logo_facebook_icon_png" />
 
     </LinearLayout>
-</layout>
