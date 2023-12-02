@@ -116,24 +116,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInBtn" />
 
-    <ImageView
-        android:id="@+id/googleicon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/facebookicon"
-        app:layout_constraintTop_toTopOf="@+id/facebookicon"
-        app:srcCompat="@drawable/_534129544" />
-
-    <ImageView
-        android:id="@+id/facebookicon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/othersignups"
-        app:srcCompat="@drawable/popular_logo_facebook_icon_png" />
+    <include  layout="@layout/social_media_icon" android:id="@+id/social_media_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
