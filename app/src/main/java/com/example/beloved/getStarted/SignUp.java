@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,8 +25,9 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        TextView loginQ = (TextView) findViewById(R.id.loginQ);
-        loginQ.setOnClickListener(new View.OnClickListener() {
+        TextView qAction = (TextView) findViewById(R.id.qAction);
+
+        qAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(SignUp.this, SignIn.class);
@@ -46,9 +48,10 @@ public class SignUp extends AppCompatActivity {
                 }}}
                 );
 
-        Button signupBtn = (Button) findViewById(R.id.signup);
+        Button signUpBtn = (Button) findViewById(R.id.navBtn);
+        signUpBtn.setText("Sign Up");
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Activity activity = SignUp.this;

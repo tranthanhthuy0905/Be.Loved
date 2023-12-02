@@ -48,7 +48,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/amita"
         android:text="Be.Loved"
-        android:textColor="#704F38"
+        android:textColor="@color/theme_color"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,22 +72,41 @@
         android:layout_width="355dp"
         android:layout_height="52dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#704F38"
+        android:backgroundTint="@color/theme_color"
         android:text="Let's Get Started"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/Slogan" />
 
-    <TextView
-        android:id="@+id/loginQ"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account? Sign In"
+        android:padding="16dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getStarted" />
+        app:layout_constraintTop_toBottomOf="@+id/getStarted"
+        android:id="@+id/questionLayout">
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text = "Already have an account?"/>
+
+        <TextView
+            android:id="@+id/qAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Sign In"
+            android:textColor="@color/theme_color"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
 
 
