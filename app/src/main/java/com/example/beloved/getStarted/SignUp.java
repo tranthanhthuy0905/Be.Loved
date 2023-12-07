@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,9 +13,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.beloved.MainActivity;
+import com.example.beloved.HomePage;
 import com.example.beloved.R;
-import com.google.android.material.snackbar.Snackbar;
 
 public class SignUp extends AppCompatActivity {
 
@@ -63,7 +61,10 @@ public class SignUp extends AppCompatActivity {
                 EditText username = findViewById(R.id.usernameInput);
                 EditText phonenumber = findViewById(R.id.phoneInput);
                 EditText password = findViewById(R.id.passwordInput);
-//                Intent intent = new Intent(SignUp.this, ABC.class); // TODO: Changing ABC by Homescreen
+                Intent intent = new Intent(SignUp.this, HomePage.class);
+                SignUp.this.startActivity(intent);
+                SignUp.this.finish();
+                // TODO: Changing ABC by Homescreen
 //                intent.putExtra("Username", username.getText().toString());
 //                intent.putExtra("phonenumber", phonenumber.getText().toString());
 //                intent.putExtra("password", password.getText().toString());
