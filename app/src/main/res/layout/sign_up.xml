@@ -9,7 +9,7 @@
         android:id="@+id/createAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Create Account"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Fill your information below or register with your social account."
         android:textAlignment="center"
         android:textColor="#838383"
@@ -34,27 +34,37 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Username"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/usernameInput"
         app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
     <TextView
-        android:id="@+id/phonenumber"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Phone Number"
+        android:layout_marginTop="10dp"
+        android:text="Email"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/usernameInput"
         app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
 
     <TextView
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Phone Number"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/usernameInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+
+    <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Password"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/phonenumber"
@@ -65,7 +75,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/rounded_input"
         android:ems="10"
@@ -77,10 +87,24 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_input"
+        android:ems="10"
+        android:hint="example@gmail.com"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/usernameInput"
+        app:layout_constraintStart_toStartOf="@+id/usernameInput"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <EditText
         android:id="@+id/phoneInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rounded_input"
         android:ems="10"
         android:hint="0363135765"
@@ -94,7 +118,7 @@
         android:id="@+id/passwordInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rounded_input"
         android:ems="10"
         android:hint="********"
@@ -108,7 +132,7 @@
         android:id="@+id/checkTerm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Agree with Terms &amp; Conditions"
         style="@style/ConditionCheckbox"
         android:textSize="14sp"

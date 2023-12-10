@@ -31,13 +31,13 @@
         app:layout_constraintTop_toBottomOf="@+id/signIn" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Username"
+        android:text="Email"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/usernameInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
         app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
     <TextView
@@ -47,11 +47,11 @@
         android:layout_marginTop="20dp"
         android:text="Password"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/usernameInput"
-        app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput" />
 
     <EditText
-        android:id="@+id/usernameInput"
+        android:id="@+id/emailInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -59,12 +59,12 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/rounded_input"
         android:ems="10"
-        android:hint="Tran Ha My"
-        android:inputType="text"
+        android:hint="example@gmail.com"
+        android:inputType="textEmailAddress"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -76,8 +76,8 @@
         android:hint="********"
         android:inputType="text"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/usernameInput"
-        app:layout_constraintStart_toStartOf="@+id/usernameInput"
+        app:layout_constraintEnd_toEndOf="@+id/emailInput"
+        app:layout_constraintStart_toStartOf="@+id/emailInput"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <include  layout="@layout/footer_format" android:id="@+id/footer"
