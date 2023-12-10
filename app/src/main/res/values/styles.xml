@@ -38,4 +38,14 @@
         <item name="cornerSizeBottomLeft">75dp</item>
         <item name="cornerFamilyBottomLeft">rounded</item>
     </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorOnPrimary">@color/md_theme_dark_inversePrimary</item>
+        <item name="colorPrimary">@color/md_theme_dark_inverseSurface</item>
+    </style>
+
 </resources>

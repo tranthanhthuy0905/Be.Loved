@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.beloved.HomePage;
 import com.example.beloved.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -82,9 +83,9 @@ public class SignIn extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
 
                     Toast.makeText(SignIn.this, "Log in successfully", Toast.LENGTH_SHORT).show();
-                    // TODO: Add Homescreen here
-                    // startActivity(new Intent(SignIn.this, Homescreen.this));
-                    // finish();
+                    Intent intent = new Intent(SignIn.this, HomePage.class);
+                    SignIn.this.startActivity(intent);
+                    SignIn.this.finish();
                 }}
             )
             .addOnFailureListener(
