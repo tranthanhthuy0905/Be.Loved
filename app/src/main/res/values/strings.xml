@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BeLoved</string>
+    <string name="product_name">Sample Product</string>
+    <string name="product_description">This is 100%cotton shirt, very comfortable.</string>
+    <string name="cost">$1</string>
+    <string name="category">Apparel</string>
 </resources>
