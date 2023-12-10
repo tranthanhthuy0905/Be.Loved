@@ -16,15 +16,6 @@
 <!--        />-->
     <include layout="@layout/product_layout"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        style="@style/Widget.App.BottomNavigationView"
-
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+    <include layout="@layout/nav_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
