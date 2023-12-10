@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon_grey"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/cart_icon"
+        android:enabled="true"
+        android:title="Cart"/>
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/chat_icon"
+        android:enabled="true"
+        android:title="Chat"
+        />
+
+    <item
+        android:id="@+id/wishlist"
+        android:icon="@drawable/wishlist_icon"
+        android:enabled="true"
+        android:title="Wishlist"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile_icon"
+        android:enabled="true"
+        android:title="Profile" />
+
+</menu>
