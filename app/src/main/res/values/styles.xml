@@ -2,6 +2,7 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:checkboxStyle">@style/ConditionCheckbox</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 
     <style name="ConditionCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
@@ -43,9 +44,31 @@
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
     </style>
 
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+    </style>
+
+    <style name="ThemeOverlay.App.FloatingActionButton" parent="">
+        <item name="colorSecondary">@color/theme_color</item>
+        <item name="colorOnSecondary">@color/theme_color</item>
+        <item name="colorOnSurface">@color/md_theme_dark_inverseOnSurface</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
         <item name="colorOnPrimary">@color/md_theme_dark_inversePrimary</item>
         <item name="colorPrimary">@color/md_theme_dark_inverseSurface</item>
+    </style>
+
+    <style name="Widget.App.CheckBox" parent="">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.CheckBox" parent="">
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorOnPrimary">#EB8A8A</item>
     </style>
 
 </resources>
