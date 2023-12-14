@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.beloved.getStarted.SignIn;
 import com.example.beloved.getStarted.SignUp;
 import com.example.beloved.product.CreateItem;
+import com.example.beloved.product.ProductDetail;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
