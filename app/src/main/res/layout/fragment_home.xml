@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/landing_page"
-    tools:context=".HomePage">
+    tools:context=".fragments.Home">
 
     <LinearLayout
         android:id="@+id/menu_bar"
@@ -81,13 +80,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feature_string" />
 
-<!--    <include-->
-<!--        android:id="@+id/bottom_navigation"-->
-<!--        layout="@layout/nav_bar"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createPost_FAB"
         android:layout_width="wrap_content"
@@ -104,5 +96,4 @@
         app:layout_constraintVertical_bias="0.875"
         style="@style/Widget.App.FloatingActionButton"
         app:srcCompat="@android:drawable/ic_menu_edit" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
