@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.beloved.HomePage;
+import com.example.beloved.LandingPage;
 import com.example.beloved.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -83,7 +84,7 @@ public class SignIn extends AppCompatActivity {
                 public void onSuccess(AuthResult authResult) {
 
                     Toast.makeText(SignIn.this, "Log in successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignIn.this, HomePage.class);
+                    Intent intent = new Intent(SignIn.this, LandingPage.class);
                     SignIn.this.startActivity(intent);
                     SignIn.this.finish();
                 }}
