@@ -9,29 +9,36 @@
         android:id="@+id/prod_img"
         android:layout_width="411dp"
         android:layout_height="291dp"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/elegant_woman_posing_classic_suit" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="New"
         android:textColor="#B2AAAA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prod_img" />
 
     <TextView
+        android:id="@+id/created_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:textColor="#B2AAAA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/status" />
+
+    <TextView
         android:id="@+id/prod_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Light Brown Jacket"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/status"
         app:layout_constraintTop_toBottomOf="@+id/status" />
@@ -40,7 +47,7 @@
         android:id="@+id/prod_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="Product Details"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/prod_title"
@@ -51,19 +58,19 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/prod_detail"
         app:layout_constraintEnd_toStartOf="@+id/rating_txt"
-        app:layout_constraintTop_toTopOf="@+id/status"
+        app:layout_constraintTop_toTopOf="@+id/prod_detail"
         app:srcCompat="@drawable/no_rating" />
 
     <TextView
         android:id="@+id/rating_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
         android:text="No rating"
         android:textColor="#B2AAAA"
         app:layout_constraintBottom_toBottomOf="@+id/rating"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/created_at"
         app:layout_constraintTop_toTopOf="@+id/rating" />
 
     <TextView
@@ -71,42 +78,81 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/rating_txt"
         app:layout_constraintStart_toStartOf="@+id/prod_detail"
         app:layout_constraintTop_toBottomOf="@+id/prod_detail" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Price"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/prod_desc"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    <ImageView
+        android:id="@+id/increase"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:srcCompat="@drawable/increase" />
+
+    <ImageView
+        android:id="@+id/line"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:paddingHorizontal="10dp"
-        android:gravity="center"
-        android:id="@+id/select_price"
-        app:layout_constraintTop_toBottomOf="@+id/prod_desc">
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintEnd_toEndOf="@+id/prod_desc"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/prod_desc"
+        app:layout_constraintTop_toBottomOf="@+id/prod_desc"
+        app:srcCompat="@drawable/horizontal_line" />
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/decrease"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/price_val"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:srcCompat="@drawable/decrease" />
 
-        <ImageView
-            android:id="@+id/increase"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/increase"
-            app:layout_constraintStart_toEndOf="@+id/price"/>
+    <TextView
+        android:id="@+id/price_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/rounded_input"
+        app:layout_constraintBottom_toBottomOf="@+id/increase"
+        app:layout_constraintStart_toEndOf="@+id/increase"
+        app:layout_constraintTop_toTopOf="@+id/increase" />
 
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add to Cart"
+        android:textSize="24sp"
+        app:icon="@drawable/cart_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
 
-    <include
-        android:id="@+id/navBar"
-        layout="@layout/nav_bar"
-        tools:layout_editor_absoluteX="-45dp"
-        tools:layout_editor_absoluteY="0dp" />
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

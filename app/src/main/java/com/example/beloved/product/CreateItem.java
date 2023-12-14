@@ -21,15 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beloved.HomePage;
-import com.example.beloved.MainActivity;
+import com.example.beloved.LandingPage;
 import com.example.beloved.R;
-import com.example.beloved.getStarted.SignIn;
-import com.example.beloved.getStarted.SignUp;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -43,13 +38,14 @@ public class CreateItem extends AppCompatActivity {
 
     private ImageView uploadImage;
     private ImageView productImg;
-    private EditText priceInput;
     private Button createBtn;
     private EditText title;
     private EditText description;
     private EditText price;
+    private Button closeBtn;
 
     private Uri selectedImgUri;
+    private String selectedImgStr;
     DatabaseReference postDbRef;
     StorageReference storageRef;
     StorageReference imageRef;
@@ -59,17 +55,11 @@ public class CreateItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_item);
 
-        priceInput = (EditText) findViewById(R.id.priceInput);
-        priceInput.setOnKeyListener(new View.OnKeyListener() {
+        closeBtn = (Button) findViewById(R.id.closeBtn);
+        closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Hide the keyboard
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    return true; // consume the event
-                }
-                return false; // allow other listeners to handle the event
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -77,6 +67,7 @@ public class CreateItem extends AppCompatActivity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKeyboard(v);
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, PICK_IMAGE_REQUEST);
@@ -92,7 +83,8 @@ public class CreateItem extends AppCompatActivity {
         postDbRef = FirebaseDatabase.getInstance(db_url).getReference("products");
         String storage_url = getResources().getString(R.string.storage_url);
         storageRef = FirebaseStorage.getInstance(storage_url).getReference("products");
-        imageRef = storageRef.child("images/" + UUID.randomUUID().toString());
+        selectedImgStr = "images/" + UUID.randomUUID().toString();
+        imageRef = storageRef.child(selectedImgStr);
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +104,7 @@ public class CreateItem extends AppCompatActivity {
             task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Log.d("Success image upload", "Post");
+                    Log.d("Successful image upload", "Post");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -124,18 +116,23 @@ public class CreateItem extends AppCompatActivity {
             productImg.setVisibility(View.VISIBLE);
         }
     }
+    private void hideKeyboard(View v) {
+        // Hide the keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
     private void insertPostData() {
         String titleStr = title.getText().toString();
         String descriptionStr = description.getText().toString();
         String priceInt = price.getText().toString();
 
-        Post newPost = new Post(titleStr, descriptionStr, selectedImgUri.toString(), priceInt, "new");
+        Post newPost = new Post(titleStr, descriptionStr, selectedImgStr, priceInt, "new");
         String post_id = postDbRef.push().getKey();
         postDbRef.child(post_id).setValue(newPost)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent intent = new Intent(CreateItem.this, HomePage.class);
+                        Intent intent = new Intent(CreateItem.this, LandingPage.class);
                         CreateItem.this.startActivity(intent);
                         CreateItem.this.finish();
                         Toast.makeText(CreateItem.this, "Create post successfully", Toast.LENGTH_SHORT).show();

@@ -31,6 +31,9 @@
             android:name=".product.CreateItem"
             android:exported="false" />
         <activity
+            android:name=".product.ProductDetail"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
