@@ -9,7 +9,7 @@
         android:id="@+id/home_fragment"
         android:name="com.example.beloved.fragments.Home"
         android:label="Home"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/cart_fragment"
         android:name="com.example.beloved.fragments.Cart"
