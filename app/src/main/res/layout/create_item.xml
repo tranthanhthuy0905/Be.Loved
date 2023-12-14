@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#4F2B2B">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/closeBtn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/close"
+        android:scaleType="fitCenter"
+        app:backgroundTint="@color/theme_color"
+        app:layout_constraintBottom_toBottomOf="@+id/addTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addTitle"
+        app:layout_constraintTop_toTopOf="@+id/addTitle" />
+
+    <EditText
+        android:id="@+id/addTitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Add title"
+        android:inputType="text"
+        android:textColor="@color/theme_color"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/addDescription"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_input"
+        android:drawableRight="@drawable/emoji_icon"
+        android:gravity="start|top"
+        android:hint="Enter description for "
+        android:inputType="text|textMultiLine"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTitle" />
+
+    <ImageView
+        android:id="@+id/locationIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/location_sign_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="@+id/location"
+        app:layout_constraintStart_toStartOf="@+id/addDescription"
+        app:layout_constraintTop_toTopOf="@+id/location" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Location"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/locationInput"
+        app:layout_constraintStart_toEndOf="@+id/locationIcon"
+        app:layout_constraintTop_toTopOf="@+id/locationInput" />
+
+    <EditText
+        android:id="@+id/locationInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Your location"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/location"
+        app:layout_constraintTop_toBottomOf="@+id/addDescription" />
+
+    <ImageView
+        android:id="@+id/priceIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/price"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintStart_toStartOf="@+id/locationIcon"
+        app:layout_constraintTop_toTopOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="Price"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/priceInput"
+        app:layout_constraintStart_toEndOf="@+id/priceIcon"
+        app:layout_constraintTop_toTopOf="@+id/priceInput" />
+
+    <EditText
+        android:id="@+id/priceInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="10000"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/locationInput" />
+
+    <ImageView
+        android:id="@+id/uploadImgIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceInput" />
+
+    <TextView
+        android:id="@+id/uploadImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Upload Images"
+        android:textColor="@color/theme_color"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadImgIcon" />
+
+    <ImageView
+        android:id="@+id/productImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/elegant_woman_posing_classic_suit"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadImg" />
+
+    <Button
+        android:id="@+id/previewBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:backgroundTint="@color/theme_color"
+        android:text="Preview"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/createBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/createBtn" />
+
+    <Button
+        android:id="@+id/createBtn"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/theme_color"
+        android:text="Create"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImg" />
+</androidx.constraintlayout.widget.ConstraintLayout>
