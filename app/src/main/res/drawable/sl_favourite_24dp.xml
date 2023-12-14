@@ -5,7 +5,7 @@
         android:state_checked="false"
         />
     <item
-        android:drawable="@drawable/favorite_fill0_wght400_grad0_opsz24"
+        android:drawable="@drawable/favorite_fill1_wght400_grad0_opsz24"
         android:state_checked="true"
         />
     <item android:drawable="@drawable/favorite_fill0_wght400_grad0_opsz24" />
