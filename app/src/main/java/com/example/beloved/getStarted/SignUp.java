@@ -15,12 +15,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.beloved.LandingPage;
 import com.example.beloved.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.example.beloved.HomePage;
 
 public class SignUp extends AppCompatActivity {
 
@@ -103,7 +104,7 @@ public class SignUp extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Toast.makeText(SignUp.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
                     // TODO: Add Homescreen here
-                    Intent intent = new Intent(SignUp.this, HomePage.class);
+                    Intent intent = new Intent(SignUp.this, LandingPage.class);
                     SignUp.this.startActivity(intent);
                     SignUp.this.finish();
                 } else {
