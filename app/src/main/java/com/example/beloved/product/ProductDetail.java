@@ -55,7 +55,7 @@ public class ProductDetail extends AppCompatActivity {
         Intent intent = getIntent();
         String post_id = intent.getStringExtra("post_id");
 
-        DatabaseReference post = postDbRef.child(post_id);
+        DatabaseReference post = postDbRef.child("-Nlc3RYkgYRG3pZEhELj");
 
         titleTV = (TextView) findViewById(R.id.prod_title);
         descTV = (TextView) findViewById(R.id.prod_desc);
