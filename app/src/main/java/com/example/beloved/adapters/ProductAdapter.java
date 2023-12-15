@@ -1,26 +1,43 @@
 package com.example.beloved.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beloved.R;
+import com.example.beloved.fragments.Cart;
+import com.example.beloved.fragments.Chat;
 import com.example.beloved.models.productItem;
+import com.example.beloved.product.CreateItem;
+import com.example.beloved.product.Post;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHolder> {
 
-    ArrayList<productItem> prodList;
+    ArrayList<Post> prodList;
     Context context;
 
-    public ProductAdapter(ArrayList<productItem> prodList, Context context) {
+    public ProductAdapter(ArrayList<Post> prodList, Context context) {
         this.prodList = prodList;
         this.context = context;
     }
@@ -34,17 +51,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.viewHolder holder, int position) {
-        final productItem items = prodList.get(position);
-        holder.prod_image.setImageResource(items.getImageUrl());
-//        holder.description.setText(items.getDescription());
+        final Post items = prodList.get(position);
+        String imgUrl = items.getImage_url();
+        if (imgUrl == null || imgUrl.isEmpty()) {
+            holder.prod_image.setImageResource(R.drawable.placeholder);
+        } else {
+            try {
+                Picasso.get().load(imgUrl).into(holder.prod_image);
+            } catch (Exception e) {
+                holder.prod_image.setImageResource(R.drawable.placeholder);
+                Log.d("Product Adapter", "cannot retrieve image for product");
+            }
+        }
         holder.title.setText(items.getTitle());
-        holder.cost.setText(items.getCost());
+        holder.cost.setText(items.getPrice());
+
     }
 
     @Override
     public int getItemCount() {
         return prodList.size();
     }
+
     public class viewHolder extends RecyclerView.ViewHolder{
         ImageView prod_image;
         TextView title, cost;
@@ -55,6 +83,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
             title = itemView.findViewById(R.id.product_name);
 //            description = itemView.findViewById(R.id.product_description);
             cost = itemView.findViewById(R.id.product_cost);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (context != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            //to be specified later
+                            Intent intent = new Intent(context, CreateItem.class);
+                            context.startActivity(intent);
+                        }
+                    }
+                }
+            });
         }
     }
 
