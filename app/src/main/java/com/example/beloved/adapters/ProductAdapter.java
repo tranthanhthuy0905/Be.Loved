@@ -68,6 +68,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
 
     }
 
+    public void setDataList(ArrayList<Post> prodList){
+        this.prodList = prodList;
+    }
     @Override
     public int getItemCount() {
         return prodList.size();
