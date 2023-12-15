@@ -1,6 +1,5 @@
 package com.example.beloved.product;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,27 +8,20 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.beloved.HomePage;
-import com.example.beloved.MainActivity;
+import com.example.beloved.LandingPage;
 import com.example.beloved.R;
-import com.example.beloved.getStarted.SignIn;
-import com.example.beloved.getStarted.SignUp;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -135,7 +127,7 @@ public class CreateItem extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent intent = new Intent(CreateItem.this, HomePage.class);
+                        Intent intent = new Intent(CreateItem.this, LandingPage.class);
                         CreateItem.this.startActivity(intent);
                         CreateItem.this.finish();
                         Toast.makeText(CreateItem.this, "Create post successfully", Toast.LENGTH_SHORT).show();
