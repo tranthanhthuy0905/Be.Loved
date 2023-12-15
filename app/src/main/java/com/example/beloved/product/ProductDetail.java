@@ -90,7 +90,6 @@ public class ProductDetail extends AppCompatActivity {
                     Log.d("FirebaseData", "Post not found with ID: " + post_id);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());

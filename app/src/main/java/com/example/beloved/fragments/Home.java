@@ -7,14 +7,24 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsetsController;
+import android.widget.EditText;
+import androidx.appcompat.widget.SearchView;
 
 import com.example.beloved.R;
 import com.example.beloved.adapters.ProductAdapter;
@@ -45,7 +55,7 @@ public class Home extends Fragment {
     private static final String TAG = "Home";
     FirebaseDatabase db;
     DatabaseReference dataRef;
-    DataSnapshot raw_data;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +65,9 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -68,15 +78,17 @@ public class Home extends Fragment {
         productList = new ArrayList<>();
         //setup adapter
         adapter = new ProductAdapter(productList, getContext());
-        productList.add(new Post("Sample", "a sample product - fake data", "https://thestylebungalow.com/wp-content/uploads/2019/05/IMG_9766.jpg", "9.99", "new"));
+        Post sampleProd = new Post("Sample", "a sample product - fake data", "https://thestylebungalow.com/wp-content/uploads/2019/05/IMG_9766.jpg", "9.99", "new");
+        productList.add(sampleProd);
         prodLayout = binding.getRoot().findViewById(R.id.productView);
         prodLayout.setAdapter(adapter);
-        prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         getData();
 
-        ArrayList<Post> tempList = new ArrayList<>();
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
+        ConstraintLayout constraintLayout = view.findViewById(R.id.home_fragment); // Replace with your ConstraintLayout ID
+
         createBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +96,8 @@ public class Home extends Fragment {
                 startActivity(intent);
             }}
         ));
+
+
     }
     public void getData() {
         dataRef.addValueEventListener(new ValueEventListener() {
@@ -102,6 +116,8 @@ public class Home extends Fragment {
                     p.setCreated_at(created_at);
                     productList.add(p);
                 }
+                adapter.setDataList(productList);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
