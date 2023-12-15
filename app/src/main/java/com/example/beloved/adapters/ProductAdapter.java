@@ -1,6 +1,7 @@
 package com.example.beloved.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -17,7 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beloved.R;
+import com.example.beloved.fragments.Cart;
+import com.example.beloved.fragments.Chat;
 import com.example.beloved.models.productItem;
+import com.example.beloved.product.CreateItem;
 import com.example.beloved.product.Post;
 import com.squareup.picasso.Picasso;
 
@@ -61,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
         }
         holder.title.setText(items.getTitle());
         holder.cost.setText(items.getPrice());
+
     }
 
     @Override
@@ -78,6 +83,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
             title = itemView.findViewById(R.id.product_name);
 //            description = itemView.findViewById(R.id.product_description);
             cost = itemView.findViewById(R.id.product_cost);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (context != null) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            //to be specified later
+                            Intent intent = new Intent(context, CreateItem.class);
+                            context.startActivity(intent);
+                        }
+                    }
+                }
+            });
         }
     }
 

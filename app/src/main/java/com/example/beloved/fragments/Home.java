@@ -72,7 +72,20 @@ public class Home extends Fragment {
         prodLayout = binding.getRoot().findViewById(R.id.productView);
         prodLayout.setAdapter(adapter);
         prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        getData();
+
         ArrayList<Post> tempList = new ArrayList<>();
+        FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
+        createBtn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CreateItem.class);
+                startActivity(intent);
+            }}
+        ));
+    }
+    public void getData() {
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,14 +108,6 @@ public class Home extends Fragment {
             }
         });
 
-        FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
-        createBtn.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CreateItem.class);
-                startActivity(intent);
-            }}
-        ));
     }
 }
 
