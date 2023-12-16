@@ -34,6 +34,9 @@
             android:name=".product.ProductDetail"
             android:exported="false" />
         <activity
+            android:name=".product.Checkout"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
