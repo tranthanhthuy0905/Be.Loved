@@ -130,15 +130,15 @@
         app:layout_constraintTop_toBottomOf="@+id/addrTypeText" />
 
     <TextView
-        android:id="@+id/orderListTexgt"
+        android:id="@+id/orderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
         android:text="Order List"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/shipTypeConsText"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/estimateText" />
 
     <View
         android:id="@+id/view3"
@@ -159,12 +159,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/estimateText" />
 
-    <ListView
-        android:layout_width="344dp"
-        android:layout_height="311dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@+id/orderListTexgt"
-        app:layout_constraintTop_toBottomOf="@+id/orderListTexgt" />
+<!--    <ListView-->
+<!--        android:id="@+id/orderList"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="311dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/orderText"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/orderText" />-->
+    <!-- activity_main.xml -->
 
     <ImageView
         android:id="@+id/imageView3"
@@ -183,6 +185,15 @@
         app:layout_constraintStart_toStartOf="@+id/shipTypeConsText"
         app:layout_constraintTop_toBottomOf="@+id/shipTypeConsText"
         app:srcCompat="@drawable/shopping_cart_svgrepo_com" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productListView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintStart_toStartOf="@+id/orderText"
+        app:layout_constraintTop_toBottomOf="@+id/orderText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
