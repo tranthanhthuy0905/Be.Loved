@@ -88,7 +88,7 @@
         android:id="@+id/continueBtn"
         android:layout_width="324dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="30dp"
         android:text="Continue to Payment"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
