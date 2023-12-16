@@ -31,6 +31,12 @@
             android:name=".product.CreateItem"
             android:exported="false" />
         <activity
+            android:name=".product.OrderConfirmation"
+            android:exported="false" />
+        <activity
+            android:name=".product.Rating"
+            android:exported="false" />
+        <activity
             android:name=".product.ProductDetail"
             android:exported="false" />
         <activity
