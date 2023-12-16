@@ -18,10 +18,15 @@ import android.widget.Toast;
 
 import com.example.beloved.LandingPage;
 import com.example.beloved.R;
+import com.example.beloved.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
@@ -33,6 +38,7 @@ public class SignUp extends AppCompatActivity {
     private Button signUpBtn;
 
     private FirebaseAuth auth;
+    DatabaseReference userDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,11 +108,27 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(SignUp.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
-                    // TODO: Add Homescreen here
-                    Intent intent = new Intent(SignUp.this, LandingPage.class);
-                    SignUp.this.startActivity(intent);
-                    SignUp.this.finish();
+                    AuthResult authResult = task.getResult();
+                    if (authResult != null) {
+                        // AuthResult contains information, including the user's UID
+                        FirebaseUser user = authResult.getUser();
+
+                        if (user != null) {
+                            String userId = user.getUid();
+                            String db_url = getResources().getString(R.string.db_url);
+                            userDbRef = FirebaseDatabase.getInstance(db_url).getReference("users");
+                            User createUser = new User(username, (long) phoneNumber, email);
+                            userDbRef.child(userId).setValue(createUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Intent intent = new Intent(SignUp.this, LandingPage.class);
+                                    SignUp.this.startActivity(intent);
+                                    SignUp.this.finish();
+                                    Toast.makeText(SignUp.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
                 } else {
                     Toast.makeText(SignUp.this,"Fail to sign up", Toast.LENGTH_SHORT).show();
                 }
