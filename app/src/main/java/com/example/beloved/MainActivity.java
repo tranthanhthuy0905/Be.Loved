@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.beloved.getStarted.SignIn;
 import com.example.beloved.getStarted.SignUp;
+import com.example.beloved.product.Checkout;
 import com.example.beloved.product.CreateItem;
 import com.example.beloved.product.OrderConfirmation;
 import com.example.beloved.product.ProductDetail;

@@ -1,6 +1,7 @@
 package com.example.beloved.product;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.beloved.LandingPage;
+import com.example.beloved.MainActivity;
 import com.example.beloved.R;
 import com.example.beloved.getStarted.SignIn;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +32,9 @@ public class Rating extends AppCompatActivity {
     private RatingBar ratingBar;
     private EditText review;
     private Button submit;
+    private ImageView back;
     private String ratingStr, reviewStr;
+
     DatabaseReference postDbRef;
     // TODO: Change this post_id by passing through Intent
     private String post_id = "-Nld6vfZcPUxyjwQI880";
@@ -37,6 +42,14 @@ public class Rating extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rating);
+
+        back = (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         String db_url = getResources().getString(R.string.db_url);
         postDbRef = FirebaseDatabase.getInstance(db_url).getReference("products");
@@ -78,10 +91,15 @@ public class Rating extends AppCompatActivity {
                             String reviewDb= dataSnapshot.child("review").getValue(String.class);
                             if (ratingDb == null || !ratingDb.equals(ratingStr)) {
                                 postRef.child("rating").setValue(ratingStr);
+                                if (reviewDb == null || !reviewDb.equals(reviewStr)) {
+                                    postRef.child("review").setValue(reviewStr);
+                                    Toast.makeText(Rating.this, "Review successfully", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Rating.this, LandingPage.class);
+                                    Rating.this.startActivity(intent);
+                                    Rating.this.finish();
+                                }
                             }
-                            if (reviewDb == null || !reviewDb.equals(reviewStr)) {
-                                postRef.child("review").setValue(reviewStr);
-                            }
+
                         } else {
                             Log.d("Rating", "Not change");
                         }
