@@ -75,19 +75,44 @@ public class Home extends Fragment {
         db = FirebaseDatabase.getInstance(db_url);
         dataRef = db.getReference("products");
         productList = new ArrayList<>();
-        //setup adapter
-        adapter = new ProductAdapter(productList, getContext());
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Post> prod = new ArrayList();
+                for (DataSnapshot data: snapshot.getChildren()) {
+//                    String title = data.child("title").getValue(String.class);
+//                    String status = data.child("status").getValue(String.class);
+//                    String created_at = data.child("created_at").getValue(String.class);
+//                    String description = data.child("description").getValue(String.class);
+//                    String price = data.child("price").getValue(String.class);
+//                    String image_url = data.child("image_url").getValue(String.class);
+//                    String seller_id = data.child("seller_id").getValue(String.class);
+//                    Post p = new Post(title, description, image_url, price, status);
+//                    p.setId(data.getKey());
+                    Post p = data.getValue(Post.class);
+                    prod.add(p);
+                }
+                productList.addAll(prod);
+                Log.d(TAG, productList.toString());
+                adapter.setDataList(productList);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+//        setup adapter
         Post sampleProd = new Post("Sample", "a sample product - fake data", "https://thestylebungalow.com/wp-content/uploads/2019/05/IMG_9766.jpg", "9.99", "new");
         productList.add(sampleProd);
+//        getData();
+
+        Log.d(TAG, productList.toString());
+
+        adapter = new ProductAdapter(productList, getContext());
         prodLayout = binding.getRoot().findViewById(R.id.productView);
         prodLayout.setAdapter(adapter);
         prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        getData();
-
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
-        ConstraintLayout constraintLayout = view.findViewById(R.id.home_fragment); // Replace with your ConstraintLayout ID
-
         createBtn.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,29 +124,7 @@ public class Home extends Fragment {
 
     }
     public void getData() {
-        dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot child: snapshot.getChildren()) {
-                    HashMap<String, String> val = (HashMap<String, String>) child.getValue();
-                    String title = val.get("title");
-                    String status = val.get("status");
-                    String created_at = val.get("created_at");
-                    String description = val.get("description");
-                    String price = val.get("price");
-                    String image_url = val.get("image_url");
-                    Post p = new Post(title, description, image_url, price, status);
-                    p.setId(child.getKey());
-                    p.setCreated_at(created_at);
-                    productList.add(p);
-                }
-                adapter.setDataList(productList);
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
 
     }
 }
