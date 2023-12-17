@@ -2,17 +2,37 @@ package com.example.beloved.models;
 
 public class User {
     private String username;
-    private Long phoneNumber;
+    private String phoneNumber;
     private String location;
     private String email;
+    private String userId;
+    private String fcmToken;
 
-    public User(String username, Long phoneNumber, String email) {
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public User() {
+    }
+
+    public User(String username, String phoneNumber, String email) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
-    public User(String username, Long phoneNumber, String location, String email) {
+    public User(String username, String phoneNumber, String location, String email) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.location = location;
@@ -27,7 +47,7 @@ public class User {
         return username;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -43,7 +63,7 @@ public class User {
         this.username = username;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
