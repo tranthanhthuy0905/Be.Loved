@@ -7,13 +7,16 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.beloved.adapters.CartsAdapter;
 import com.example.beloved.adapters.PostAdapter;
 import com.example.beloved.adapters.ProductAdapter;
 import com.example.beloved.fragments.Home;
@@ -36,7 +39,7 @@ import java.util.HashMap;
 // DO NOT USE THIS -- REFER TO LANDING PAGE INSTEAD
 public class HomePage extends AppCompatActivity {
     ArrayList<Post> productList;
-    PostAdapter postAdapter;
+//    ProductAdapter postAdapter;
 
     ProductAdapter adapter;
     RecyclerView prodLayout;
@@ -57,17 +60,43 @@ public class HomePage extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         prodLayout.setLayoutManager(layoutManager);
 
-        FirebaseRecyclerOptions<Post> options
-                = new FirebaseRecyclerOptions.Builder<Post>()
-                .setQuery(db.getReference("products"), Post.class)
-                .build();
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        postAdapter = new PostAdapter(options);
-        prodLayout.setAdapter(postAdapter);
+//        FirebaseRecyclerOptions<Post> options
+//                = new FirebaseRecyclerOptions.Builder<Post>()
+//                .setQuery(db.getReference("products"), Post.class)
+//                .build();
+//        // Connecting object of required Adapter class to
+//        // the Adapter class itself
+//        a = new PostAdapter(options);
+        adapter = new ProductAdapter(productList, this);
+        prodLayout.setAdapter(adapter);
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList = new ArrayList<>();
+                for (DataSnapshot item: snapshot.getChildren()) {
+                        Post p = item.getValue(Post.class);
+                        p.setKey(item.getKey());
+                        Log.d("CART product getter:", item.getKey() + "" + p.getTitle());
+                        productList.add(p);
+                        adapter.addPost(p);
+                        adapter.notifyDataSetChanged();
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("FirebaseData", "Home Products get error", error.toException());
+
+            }
+        });
+
+        adapter = new ProductAdapter(productList,this);
+//        layoutManager = new GridLayoutManager(this, 2);
+//        layoutManager.setReverseLayout(true);
+        prodLayout.setLayoutManager(layoutManager);
+        prodLayout.setAdapter(adapter);
 
         FloatingActionButton createBtn = findViewById(R.id.createPost_FAB);
-        postAdapter.startListening();
     }
 
 }

@@ -19,11 +19,11 @@
         android:title="Chat"
         />
 
-    <item
-        android:id="@+id/favs_fragment"
-        android:icon="@drawable/wishlist_icon"
-        android:enabled="true"
-        android:title="Wishlist"/>
+<!--    <item-->
+<!--        android:id="@+id/favs_fragment"-->
+<!--        android:icon="@drawable/wishlist_icon"-->
+<!--        android:enabled="true"-->
+<!--        android:title="Wishlist"/>-->
 
     <item
         android:id="@+id/profile_fragment"

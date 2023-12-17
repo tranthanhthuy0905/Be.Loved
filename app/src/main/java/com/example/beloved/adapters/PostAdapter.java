@@ -29,15 +29,11 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostAdapter.Posts
         super(options);
     }
 
-    // Function to bind the view in Card view(here
-    // "Post.xml") iwth data in
-    // model class(here "Post.class")
     @Override
     protected void
     onBindViewHolder(@NonNull PostsViewholder holder,
                      int position, @NonNull Post model)
     {
-
         String imgUrl = model.getImage_url();
         String id = model.getKey();
         if (imgUrl == null || imgUrl.isEmpty()) {
@@ -61,13 +57,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostAdapter.Posts
                 context.startActivity(intent);
             }
         });
-
-
     }
-
-    // Function to tell the class about the Card view (here
-    // "Post.xml")in
-    // which the data will be shown
     @NonNull
     @Override
     public PostsViewholder onCreateViewHolder(@NonNull ViewGroup parent,
