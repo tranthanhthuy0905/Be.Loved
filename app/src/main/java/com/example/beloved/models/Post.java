@@ -11,7 +11,7 @@ public class Post {
     private String price;
     private String status;
     private String image_url;
-    private String id;
+    private String key;
 
     Post(){}
     public Post(String title, String description, String image_url, String price, String status) {
@@ -55,17 +55,18 @@ public class Post {
     public String getPrice() {
         return this.price;
     }
-    public String getId() {
-        return this.id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
     public String getCreatedAt() {
         return this.created_at;
     }
     public void setCreated_at(String t) {
         this.created_at = t;
     }
+    public void setKey(String key) {
+        this.key = key;
+    }
+    public String getKey() {
+        return key;
+    }
+
 
 }
