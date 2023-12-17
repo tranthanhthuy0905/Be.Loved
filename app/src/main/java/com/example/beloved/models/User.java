@@ -1,11 +1,11 @@
 package com.example.beloved.models;
 
 public class User {
-    private String username;
+    private String name;
     private String phoneNumber;
     private String location;
     private String email;
-    private String userId;
+    private String uid;
     private String fcmToken;
 
     public String getFcmToken() {
@@ -15,25 +15,25 @@ public class User {
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
     }
-    public String getUserId() {
-        return userId;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public User() {
     }
 
     public User(String username, String phoneNumber, String email) {
-        this.username = username;
+        this.name = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
     public User(String username, String phoneNumber, String location, String email) {
-        this.username = username;
+        this.name = username;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.email = email;
@@ -43,8 +43,8 @@ public class User {
         this.location = location;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
     public String getPhoneNumber() {
@@ -59,8 +59,8 @@ public class User {
         return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {

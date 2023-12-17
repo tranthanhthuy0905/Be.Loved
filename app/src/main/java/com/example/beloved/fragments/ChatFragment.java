@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beloved.adapters.RecentChatRecyclerAdapter;
 import com.example.beloved.models.ChatroomModel;
+import com.example.beloved.models.User;
 import com.example.beloved.utils.FirebaseUtil;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.SnapshotParser;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -42,22 +46,15 @@ public class ChatFragment extends Fragment {
 
     void setupRecyclerView(){
         Query query = FirebaseDatabase.getInstance("https://beloved-e77c6-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("chatrooms")
-                .orderByChild("userIds/" + FirebaseUtil.currentUserId())
-                .equalTo(true);
-
-        Query query = FirebaseUtil.allUserCollectionReference();
+                .getReference("user");
+        FirebaseRecyclerOptions<User> options = new FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(query,User.class).build();
 
 
-        FirebaseRecyclerOptions<ChatroomModel> options = new FirebaseRecyclerOptions.Builder<ChatroomModel>()
-                .setQuery(query,ChatroomModel.class)
-                .build();
-
-        adapter = new RecentChatRecyclerAdapter(options,getContext());
+        adapter = new RecentChatRecyclerAdapter(options, getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         adapter.startListening();
-
     }
 
     @Override
