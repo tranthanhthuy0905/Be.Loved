@@ -19,7 +19,7 @@ import com.example.beloved.fragments.Home;
 import com.example.beloved.getStarted.SignUp;
 import com.example.beloved.models.productItem;
 import com.example.beloved.product.CreateItem;
-import com.example.beloved.product.Post;
+import com.example.beloved.models.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
