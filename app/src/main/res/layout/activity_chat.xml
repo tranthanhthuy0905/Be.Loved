@@ -81,7 +81,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/my_primary"
+            app:tint="@color/theme_color"
             android:id="@+id/message_send_btn"
             android:padding="8dp"
             android:layout_marginStart="10dp"
