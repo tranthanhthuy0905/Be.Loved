@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.example.beloved.getStarted.SignIn;
 import com.example.beloved.getStarted.SignUp;
+import com.example.beloved.models.User;
 import com.example.beloved.product.Checkout;
 import com.example.beloved.product.CreateItem;
 import com.example.beloved.product.OrderConfirmation;
 import com.example.beloved.product.ProductDetail;
+import com.example.beloved.utils.AndroidUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, SignIn.class);
+//                Intent intent = new Intent(MainActivity.this, SignIn.class);
+//                User user = new User("dla", "0777117497", "dla@axon.com");
+//                user.setUserId("3F9VAcvs3leRFiFuVDuHPysWE173");
+//                AndroidUtil.passUserModelAsIntent(intent,user);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 MainActivity.this.startActivity(intent);
                 MainActivity.this.finish();
             }
