@@ -5,17 +5,20 @@ import android.os.Parcelable;
 
 // OrderItem.java
 public class OrderItem implements Parcelable {
-    private final int imageResource;
+    private final String imageUrl;
     private final String productName;
     private final String productPrice;
 
-    public OrderItem(int imageResource, String productName, String productPrice) {
-        this.imageResource = imageResource;
+    public OrderItem(String imageUrl, String productName, String productPrice) {
+        this.imageUrl = imageUrl;
         this.productName = productName;
         this.productPrice = productPrice;
     }
 
-    public int getImageResource() {return imageResource;}
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
 
     public String getProductName() {
         return productName;
@@ -26,7 +29,7 @@ public class OrderItem implements Parcelable {
     }
 
     protected OrderItem(Parcel in) {
-        imageResource = in.readInt();
+        imageUrl = in.readString();
         productName = in.readString();
         productPrice = in.readString();
     }
@@ -48,7 +51,7 @@ public class OrderItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(imageResource);
+        dest.writeString(imageUrl);
         dest.writeString(productName);
         dest.writeString(productPrice);
     }

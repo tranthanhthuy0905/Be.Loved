@@ -45,6 +45,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -57,6 +58,7 @@ public class Home extends Fragment {
 
     ArrayList<Post> productList;
     PostAdapter postAdapter;
+    ProductAdapter adapter;
     RecyclerView prodLayout;
     FragmentHomeBinding binding;
     private static final String TAG = "Home";
@@ -85,25 +87,30 @@ public class Home extends Fragment {
         productList = new ArrayList<>();
         prodLayout = binding.getRoot().findViewById(R.id.productView);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        layoutManager.setReverseLayout(true);
         prodLayout.setLayoutManager(layoutManager);
+        adapter = new ProductAdapter(productList, getActivity());
+        prodLayout.setAdapter(adapter);
 
-        FirebaseRecyclerOptions<Post> options
-                = new FirebaseRecyclerOptions.Builder<Post>()
-                .setQuery(db.getReference("products").orderByChild("createdAt"),
-                        new SnapshotParser<Post >() {
-                    @NonNull
-                    @Override
-                    public Post parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        Post postItem = snapshot.getValue(Post.class);
-                        // so i wanted to add the key of the node as a field in the node object.
-                        postItem.setKey(snapshot.getKey());
-                        return postItem;}}).build();
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        postAdapter = new PostAdapter(options);
-        prodLayout.setAdapter(postAdapter);
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList = new ArrayList<>();
+                for (DataSnapshot item: snapshot.getChildren()) {
+                    Post p = item.getValue(Post.class);
+                    p.setKey(item.getKey());
+                    Log.d("CART product getter:", item.getKey() + "" + p.getTitle());
+                    productList.add(p);
+                    adapter.addPost(p);
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "Firebase Data Listener", error.toException());
+            }
+        });
 
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
         createBtn.setOnClickListener((new View.OnClickListener() {
@@ -113,20 +120,6 @@ public class Home extends Fragment {
                 startActivity(intent);
             }}
         ));
-    }
-    @Override public void onStart()
-    {
-        super.onStart();
-        postAdapter.startListening();
-
-    }
-
-    // Function to tell the app to stop getting
-    // data from database on stopping of the activity
-    @Override public void onStop()
-    {
-        super.onStop();
-        postAdapter.stopListening();
     }
 }
 

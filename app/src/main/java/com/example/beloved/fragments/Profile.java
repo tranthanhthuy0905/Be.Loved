@@ -3,13 +3,8 @@ package com.example.beloved.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +13,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.beloved.LandingPage;
 import com.example.beloved.MainActivity;
-import com.example.beloved.MyProfile;
+import com.example.beloved.user.MyProfile;
 import com.example.beloved.R;
-import com.example.beloved.databinding.FragmentHomeBinding;
 import com.example.beloved.databinding.FragmentProfileBinding;
 import com.example.beloved.getStarted.SignIn;
 import com.example.beloved.models.UserProfile;
-import com.example.beloved.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 public class Profile extends Fragment {
     FragmentProfileBinding binding;

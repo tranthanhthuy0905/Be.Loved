@@ -1,4 +1,4 @@
-package com.example.beloved;
+package com.example.beloved.user;
 
 import android.content.Intent;
 import android.media.Image;
@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.beloved.R;
 import com.example.beloved.adapters.ProductAdapter;
 import com.example.beloved.models.Post;
 import com.example.beloved.models.UserProfile;
@@ -77,9 +78,9 @@ public class MyProfile extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     // User exists, get the email
 //                    Log.d("PROFILE/GET-DATA", (String) dataSnapshot.getValue().toString());
-                    String name = dataSnapshot.child("name").getValue(String.class);
-                    String address = dataSnapshot.child("address").getValue(String.class);
-                    String phone = dataSnapshot.child("phone").getValue(String.class);
+                    String name = dataSnapshot.child("name").exists() ? dataSnapshot.child("name").getValue(String.class) : "";
+                    String address = dataSnapshot.child("address").exists() ? dataSnapshot.child("address").getValue(String.class) : "";
+                    String phone = dataSnapshot.child("phone").exists() ? dataSnapshot.child("phone").getValue(String.class) : "";
                     profile.setAddress(address);
                     profile.setContact(phone);
                     profile.setName(name);
