@@ -32,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ChatActivity extends AppCompatActivity {
     User otherUser;
@@ -52,7 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
-        chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(),otherUser.getUserId());
+        chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(),otherUser.getUid());
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);
@@ -64,7 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         backBtn.setOnClickListener((v)->{
             onBackPressed();
         });
-        otherUsername.setText(otherUser.getUsername());
+        otherUsername.setText(otherUser.getName());
 
         sendMessageBtn.setOnClickListener((v -> {
             String message = messageInput.getText().toString().trim();
@@ -151,7 +150,7 @@ public class ChatActivity extends AppCompatActivity {
     void createNewChatroom() {
         chatroomModel = new ChatroomModel(
                 chatroomId,
-                Arrays.asList(FirebaseUtil.currentUserId(), otherUser.getUserId()),
+                Arrays.asList(FirebaseUtil.currentUserId(), otherUser.getUid()),
                 Timestamp.now(),
                 ""
         );
