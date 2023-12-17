@@ -27,16 +27,17 @@ import android.widget.EditText;
 import androidx.appcompat.widget.SearchView;
 
 import com.example.beloved.R;
+import com.example.beloved.adapters.PostAdapter;
 import com.example.beloved.adapters.ProductAdapter;
 import com.example.beloved.databinding.FragmentHomeBinding;
 import com.example.beloved.models.Post;
 import com.example.beloved.product.CreateItem;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -48,7 +49,7 @@ import java.util.HashMap;
 public class Home extends Fragment {
 
     ArrayList<Post> productList;
-    ProductAdapter adapter;
+    PostAdapter postAdapter;
     RecyclerView prodLayout;
     FragmentHomeBinding binding;
     private static final String TAG = "Home";
@@ -75,42 +76,18 @@ public class Home extends Fragment {
         db = FirebaseDatabase.getInstance(db_url);
         dataRef = db.getReference("products");
         productList = new ArrayList<>();
-        dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Post> prod = new ArrayList();
-                for (DataSnapshot data: snapshot.getChildren()) {
-//                    String title = data.child("title").getValue(String.class);
-//                    String status = data.child("status").getValue(String.class);
-//                    String created_at = data.child("created_at").getValue(String.class);
-//                    String description = data.child("description").getValue(String.class);
-//                    String price = data.child("price").getValue(String.class);
-//                    String image_url = data.child("image_url").getValue(String.class);
-//                    String seller_id = data.child("seller_id").getValue(String.class);
-//                    Post p = new Post(title, description, image_url, price, status);
-//                    p.setId(data.getKey());
-                    Post p = data.getValue(Post.class);
-                    prod.add(p);
-                }
-                productList.addAll(prod);
-                Log.d(TAG, productList.toString());
-                adapter.setDataList(productList);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-//        setup adapter
-        Post sampleProd = new Post("Sample", "a sample product - fake data", "https://thestylebungalow.com/wp-content/uploads/2019/05/IMG_9766.jpg", "9.99", "new");
-        productList.add(sampleProd);
-//        getData();
-
-        Log.d(TAG, productList.toString());
-
-        adapter = new ProductAdapter(productList, getContext());
         prodLayout = binding.getRoot().findViewById(R.id.productView);
-        prodLayout.setAdapter(adapter);
         prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        FirebaseRecyclerOptions<Post> options
+                = new FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(dataRef, Post.class)
+                .build();
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        postAdapter = new PostAdapter(options);
+
+        prodLayout.setAdapter(postAdapter);
 
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
         createBtn.setOnClickListener((new View.OnClickListener() {
@@ -120,12 +97,20 @@ public class Home extends Fragment {
                 startActivity(intent);
             }}
         ));
-
+    }
+    @Override public void onStart()
+    {
+        super.onStart();
+        postAdapter.startListening();
 
     }
-    public void getData() {
 
-
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override public void onStop()
+    {
+        super.onStop();
+        postAdapter.stopListening();
     }
 }
 
