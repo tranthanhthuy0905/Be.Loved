@@ -1,4 +1,4 @@
-package com.example.beloved.product;
+package com.example.beloved.models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,142 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:theme="@style/AppTheme"
-    tools:context=".fragments.Profile">
+    android:background="#FFFFFF">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profilePicCard"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:text="Profile"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="30dp"
-        app:cardCornerRadius="60dp">
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile"
+        app:shapeAppearanceOverlay="@style/Circular"
+        app:srcCompat="@mipmap/ic_launcher" />
 
-        <!-- Profile Picture -->
-        <ImageView
-            android:id="@+id/profilePicture"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/default_profile_image"
-            android:scaleType="centerCrop"
-            />
+    <ImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/profile"
+        app:layout_constraintStart_toStartOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    </androidx.cardview.widget.CardView>
-
-
-        <!-- User Details -->
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/profilePicCard"
-            android:layout_centerHorizontal="true"
-            android:text="User Name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/username"
-            android:layout_centerHorizontal="true"
-            android:text="john.doe@example.com"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="8dp"/>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/yourProfile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/email"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginStart="15dp"
+        android:text="My Profile"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileIcon"
+        app:layout_constraintStart_toEndOf="@+id/profileIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileIcon" />
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileIcon" />
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yourProfile"
+        app:srcCompat="@drawable/horizontal_line" />
+
+    <ImageView
+        android:id="@+id/paymentIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/payment_method"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    <TextView
+        android:id="@+id/payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/paymentIcon"
+        app:layout_constraintStart_toStartOf="@+id/yourProfile"
+        app:layout_constraintTop_toTopOf="@+id/paymentIcon" />
+
+    <ImageView
+        android:id="@+id/more1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintTop_toTopOf="@+id/paymentIcon" />
+
+    <ImageView
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentIcon"
+        app:srcCompat="@drawable/horizontal_line" />
+
+    <ImageView
+        android:id="@+id/orderIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/order"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+    <TextView
+        android:id="@+id/order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Order"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/orderIcon"
+        app:layout_constraintStart_toStartOf="@+id/yourProfile"
+        app:layout_constraintTop_toTopOf="@+id/orderIcon" />
+
+    <ImageView
+        android:id="@+id/more2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintTop_toTopOf="@+id/orderIcon" />
+
+    <ImageView
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderIcon"
+        app:srcCompat="@drawable/horizontal_line" />
+
+    <ImageView
+        android:id="@+id/settingIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/setting"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <TextView
+        android:id="@+id/setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setting"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/settingIcon"
+        app:layout_constraintStart_toStartOf="@+id/yourProfile"
+        app:layout_constraintTop_toTopOf="@+id/settingIcon" />
+
+    <ImageView
+        android:id="@+id/more3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintTop_toTopOf="@+id/settingIcon" />
+
+    <ImageView
+        android:id="@+id/line3"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingIcon"
+        app:srcCompat="@drawable/horizontal_line" />
+
+    <ImageView
+        android:id="@+id/privacyIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/privacy"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+    <TextView
+        android:id="@+id/privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/privacyIcon"
+        app:layout_constraintStart_toStartOf="@+id/yourProfile"
+        app:layout_constraintTop_toTopOf="@+id/privacyIcon" />
+
+    <ImageView
+        android:id="@+id/more4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintTop_toTopOf="@+id/privacyIcon" />
+
+    <ImageView
+        android:id="@+id/line4"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:scaleX="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacyIcon"
+        app:srcCompat="@drawable/horizontal_line" />
+
+    <ImageView
+        android:id="@+id/logoutIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/logout"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/line4" />
+
+    <TextView
+        android:id="@+id/lougout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logoutIcon"
+        app:layout_constraintStart_toStartOf="@+id/yourProfile"
+        app:layout_constraintTop_toTopOf="@+id/logoutIcon" />
+
+    <ImageView
+        android:id="@+id/more5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintTop_toTopOf="@+id/logoutIcon" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:textSize="16sp"
-                android:layout_marginEnd="8dp"/>
-
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:inputType="textPassword"/>
-
-        </LinearLayout>
-
-        <!-- Address -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="16sp"
-                android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/editTextAddress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:inputType="text"/>
-
-        </LinearLayout>
-
-        <!-- Phone -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Phone"
-                android:textSize="16sp"
-                android:layout_marginEnd="10dp"/>
-
-            <EditText
-                android:id="@+id/editTextPhone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:inputType="phone"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
