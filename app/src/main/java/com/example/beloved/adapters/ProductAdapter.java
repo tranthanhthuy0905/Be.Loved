@@ -22,7 +22,7 @@ import com.example.beloved.fragments.Cart;
 import com.example.beloved.fragments.Chat;
 import com.example.beloved.models.productItem;
 import com.example.beloved.product.CreateItem;
-import com.example.beloved.product.Post;
+import com.example.beloved.models.Post;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;

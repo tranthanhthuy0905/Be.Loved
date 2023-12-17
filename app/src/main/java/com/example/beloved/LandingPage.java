@@ -26,7 +26,7 @@ import com.example.beloved.fragments.Favs;
 import com.example.beloved.fragments.Home;
 import com.example.beloved.fragments.Profile;
 import com.example.beloved.models.ItemViewModel;
-import com.example.beloved.product.Post;
+import com.example.beloved.models.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.ActionBar;

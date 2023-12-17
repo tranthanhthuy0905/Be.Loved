@@ -1,5 +1,6 @@
 package com.example.beloved.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,13 +13,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.beloved.LandingPage;
+import com.example.beloved.MyProfile;
 import com.example.beloved.R;
 import com.example.beloved.databinding.FragmentHomeBinding;
 import com.example.beloved.databinding.FragmentProfileBinding;
+import com.example.beloved.getStarted.SignIn;
 import com.example.beloved.models.UserProfile;
-import com.example.beloved.product.Post;
+import com.example.beloved.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -58,10 +65,23 @@ public class Profile extends Fragment {
         String db_url = getResources().getString(R.string.db_url);
         db = FirebaseDatabase.getInstance(db_url);
         userRef = db.getReference("user");
-        TextView emailView = view.findViewById(R.id.email);
-        TextView usernameView = view.findViewById(R.id.username);
-        TextView addressView = view.findViewById(R.id.editTextAddress);
-        TextView contactView = view.findViewById(R.id.editTextPhone);
+        TextView emailView = view.findViewById(R.id.username);
+
+        Button logout = view.findViewById(R.id.logout);
+        logout.setVisibility(currentUser != null? View.GONE : View.VISIBLE);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentUser != null) {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent logout = new Intent(getActivity(), LandingPage.class);
+                    startActivity(logout);
+                } else {
+                    Toast.makeText(getActivity(), "You are not signed in", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         if (currentUser != null) {
             // User is signed in
@@ -71,113 +91,27 @@ public class Profile extends Fragment {
             if (email != null & uid != null) {
                 profile = new UserProfile(uid, email);
             }
-        userRef.child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // User exists, get the email
-//                    Log.d("PROFILE/GET-DATA", (String) dataSnapshot.getValue().toString());
-                    String name = dataSnapshot.child("name").getValue(String.class);
-                    String address = dataSnapshot.child("address").getValue(String.class);
-                    String phone = dataSnapshot.child("phone").getValue(String.class);
-                    profile.setAddress(address);
-                    profile.setContact(phone);
-                    profile.setName(name);
-                    Log.d("PROFILE",profile.getName());
-                    usernameView.setText(name);
-                    addressView.setText(address);
-                    contactView.setText(phone);
-                } else {
-                    // User does not exist, insert a new record
-                    UserProfile user = new UserProfile(uid, email); // Assuming you have a User class
-                    userRef.child(uid).setValue(user);
-                    profile = user;
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("PROFILE/GET-DATA", "error getting data", error.toException());
-            }
-        });
-
-            // Use the user information as needed
-        }
-
-        usernameView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updatetoDB("name", String.valueOf(s));
-            }
-        });
-        addressView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                    updatetoDB("address", String.valueOf(s));
-            }
-        });
-        contactView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                updatetoDB("phone", String.valueOf(s));
-            }
-        });
-
-    }
-    private void updatetoDB(String field, String value) {
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if (currentUser != null) {
-            String uid = currentUser.getUid();
-            String email = currentUser.getEmail();
-
-            //find if user info exist
-            userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        } else {
+            emailView.setText("Log in to view details");
+            emailView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        // User exists, update the email
-                        userRef.child(uid).child(field).setValue(value);
-                    } else {
-                        // User does not exist, insert a new record
-                        UserProfile user = new UserProfile(uid, email); // Assuming you have a User class
-                        userRef.child(uid).setValue(user);
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Handle error
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), SignIn.class));
                 }
             });
         }
+
+        ImageButton viewProfile = view.findViewById(R.id.view_profileBtn);
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentUser != null) {
+                    Intent myProfile = new Intent(getActivity(), MyProfile.class);
+                    startActivity(myProfile);
+                } else {
+                    Toast.makeText(getActivity(), "You are not signed in", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

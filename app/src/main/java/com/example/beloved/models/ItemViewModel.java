@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.beloved.product.Post;
+import com.example.beloved.models.Post;
 
 public class ItemViewModel extends ViewModel {
     private final MutableLiveData<Post> selectedItem = new MutableLiveData<Post>();
