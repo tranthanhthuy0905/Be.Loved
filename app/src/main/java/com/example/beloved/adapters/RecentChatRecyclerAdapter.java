@@ -17,41 +17,55 @@ import com.example.beloved.ChatActivity;
 import com.example.beloved.R;
 import com.example.beloved.models.ChatroomModel;
 import com.example.beloved.models.User;
-import com.example.beloved.product.OrderAdapter;
-import com.example.beloved.product.OrderItem;
 import com.example.beloved.utils.AndroidUtil;
 import com.example.beloved.utils.FirebaseUtil;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import java.util.List;
+public class RecentChatRecyclerAdapter extends FirebaseRecyclerAdapter<ChatroomModel, RecentChatRecyclerAdapter.ChatroomModelViewHolder> {
 
-public class RecentChatRecyclerAdapter extends RecyclerView.Adapter<RecentChatRecyclerAdapter.ChatroomModelViewHolder> {
+    Context context;
 
-    private final List<User> userList;
-    private final Context context;  // Add this member variable
-
-    public RecentChatRecyclerAdapter(Context context, List<User> userList) {
-        this.userList = userList;
+    public RecentChatRecyclerAdapter(@NonNull FirebaseRecyclerOptions<ChatroomModel> options, Context context) {
+        super(options);
         this.context = context;
     }
-    @Override
-    public int getItemCount() {
-        return userList.size();
-    }
-    @Override
-    public void onBindViewHolder(@NonNull RecentChatRecyclerAdapter.ChatroomModelViewHolder holder, int position) {
-        User user = userList.get(position);
 
-        // Set data to views
-        holder.usernameText.setText(user.getUsername());
-        holder.itemView.setOnClickListener(v -> {
-            //navigate to chat activity
-            Intent intent = new Intent(context, ChatActivity.class);
-            AndroidUtil.passUserModelAsIntent(intent, user);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        });
+    @Override
+    protected void onBindViewHolder(@NonNull ChatroomModelViewHolder holder, int position, @NonNull ChatroomModel model) {
+        FirebaseUtil.getOtherUserFromChatroom(model.getUserIds())
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        boolean lastMessageSentByMe = model.getLastMessageSenderId().equals(FirebaseUtil.currentUserId());
+
+
+                        User otherUserModel = task.getResult().getValue(User.class);
+
+                        FirebaseUtil.getOtherProfilePicStorageRef(otherUserModel.getUserId()).getDownloadUrl()
+                                .addOnCompleteListener(t -> {
+                                    if(t.isSuccessful()){
+                                        Uri uri  = t.getResult();
+                                        AndroidUtil.setProfilePic(context,uri,holder.profilePic);
+                                    }
+                                });
+
+                        holder.usernameText.setText(otherUserModel.getUsername());
+                        if(lastMessageSentByMe)
+                            holder.lastMessageText.setText("You : "+model.getLastMessage());
+                        else
+                            holder.lastMessageText.setText(model.getLastMessage());
+                        holder.lastMessageTime.setText(FirebaseUtil.timestampToString(model.getLastMessageTimestamp()));
+
+                        holder.itemView.setOnClickListener(v -> {
+                            //navigate to chat activity
+                            Intent intent = new Intent(context, ChatActivity.class);
+                            AndroidUtil.passUserModelAsIntent(intent,otherUserModel);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        });
+
+                    }
+                });
     }
 
     @NonNull
