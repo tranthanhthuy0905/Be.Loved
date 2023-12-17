@@ -51,4 +51,5 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.3.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
 }

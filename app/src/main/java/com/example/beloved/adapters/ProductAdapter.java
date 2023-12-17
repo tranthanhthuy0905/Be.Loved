@@ -31,7 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
-
+// DO NOT USE - USE POST ADAPTER instead
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHolder> {
 
     ArrayList<Post> prodList;
@@ -90,7 +90,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
                 @Override
                 public void onClick(View v) {
                     if (context != null) {
-                        int pos = getAdapterPosition();
+                        int pos = getBindingAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
                             //to be specified later
                             Intent intent = new Intent(context, CreateItem.class);
