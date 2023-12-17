@@ -1,5 +1,6 @@
 package com.example.beloved.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.beloved.R;
 import com.example.beloved.models.Post;
 import com.example.beloved.product.CreateItem;
+import com.example.beloved.product.ProductDetail;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class PostAdapter extends FirebaseRecyclerAdapter<
-        Post, PostAdapter.PostsViewholder> {
+public class PostAdapter extends FirebaseRecyclerAdapter<Post, PostAdapter.PostsViewholder> {
 
     public PostAdapter(
             @NonNull FirebaseRecyclerOptions<Post> options)
@@ -38,6 +39,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<
     {
 
         String imgUrl = model.getImage_url();
+        String id = model.getKey();
         if (imgUrl == null || imgUrl.isEmpty()) {
             holder.prod_image.setImageResource(R.drawable.placeholder);
         } else {
@@ -50,7 +52,16 @@ public class PostAdapter extends FirebaseRecyclerAdapter<
         }
         holder.title.setText(model.getTitle());
         holder.cost.setText(model.getPrice());
-        Log.d("Post Adapter", model.getTitle());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = holder.itemView.getContext();
+                Intent intent = new Intent(context, ProductDetail.class);
+                intent.putExtra("post_id", model.getKey());
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -59,8 +70,7 @@ public class PostAdapter extends FirebaseRecyclerAdapter<
     // which the data will be shown
     @NonNull
     @Override
-    public PostsViewholder
-    onCreateViewHolder(@NonNull ViewGroup parent,
+    public PostsViewholder onCreateViewHolder(@NonNull ViewGroup parent,
                        int viewType)
     {
         View view = LayoutInflater.from(parent.getContext())
@@ -79,19 +89,6 @@ public class PostAdapter extends FirebaseRecyclerAdapter<
             title = itemView.findViewById(R.id.product_name);
 //            description = itemView.findViewById(R.id.product_description);
             cost = itemView.findViewById(R.id.product_cost);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (parent.getContext() != null) {
-//                        int pos = getBindingAdapterPosition();
-//                        if (pos != RecyclerView.NO_POSITION) {
-//                            //to be specified later
-//                            Intent intent = new Intent(parent.getContext(), CreateItem.class);
-//                            parent.getContext().startActivity(intent);
-//                        }
-//                    }
-//                }
-//            });
         }
 
     }

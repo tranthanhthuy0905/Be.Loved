@@ -1,5 +1,9 @@
 package com.example.beloved.fragments;
 
+import static android.widget.GridLayout.HORIZONTAL;
+
+import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.nfc.Tag;
@@ -13,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -26,6 +31,7 @@ import android.view.WindowInsetsController;
 import android.widget.EditText;
 import androidx.appcompat.widget.SearchView;
 
+import com.example.beloved.MainActivity;
 import com.example.beloved.R;
 import com.example.beloved.adapters.PostAdapter;
 import com.example.beloved.adapters.ProductAdapter;
@@ -33,6 +39,7 @@ import com.example.beloved.databinding.FragmentHomeBinding;
 import com.example.beloved.models.Post;
 import com.example.beloved.product.CreateItem;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.SnapshotParser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -77,16 +84,25 @@ public class Home extends Fragment {
         dataRef = db.getReference("products");
         productList = new ArrayList<>();
         prodLayout = binding.getRoot().findViewById(R.id.productView);
-        prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        layoutManager.setReverseLayout(true);
+        prodLayout.setLayoutManager(layoutManager);
 
         FirebaseRecyclerOptions<Post> options
                 = new FirebaseRecyclerOptions.Builder<Post>()
-                .setQuery(dataRef, Post.class)
-                .build();
+                .setQuery(db.getReference("products").orderByChild("createdAt"),
+                        new SnapshotParser<Post >() {
+                    @NonNull
+                    @Override
+                    public Post parseSnapshot(@NonNull DataSnapshot snapshot) {
+                        Post postItem = snapshot.getValue(Post.class);
+                        // so i wanted to add the key of the node as a field in the node object.
+                        postItem.setKey(snapshot.getKey());
+                        return postItem;}}).build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
         postAdapter = new PostAdapter(options);
-
         prodLayout.setAdapter(postAdapter);
 
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
