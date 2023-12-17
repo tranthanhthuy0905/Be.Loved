@@ -49,5 +49,6 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 
 }
