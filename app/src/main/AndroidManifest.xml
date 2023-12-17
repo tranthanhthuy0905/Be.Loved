@@ -13,10 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeLoved"
         android:usesCleartextTraffic="true"
-
         tools:targetApi="31">
         <activity
-            android:name=".product.ProductDetail"
+            android:name=".HomePage"
             android:exported="false">
         </activity>
 
@@ -30,16 +29,24 @@
             android:name=".product.CreateItem"
             android:exported="false" />
         <activity
-            android:name=".LandingPage"
+            android:name=".product.OrderConfirmation"
+            android:exported="false" />
+        <activity
+            android:name=".product.Rating"
+            android:exported="false" />
+        <activity
+            android:name=".product.ProductDetail"
+            android:exported="false" />
+        <activity
+            android:name=".product.Checkout"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
         </activity>
 
         <meta-data
