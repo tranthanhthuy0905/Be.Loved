@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.beloved.MainActivity;
 import com.example.beloved.R;
-import com.example.beloved.getStarted.SignUp;
 import com.example.beloved.product.Checkout;
 import com.example.beloved.product.OrderItem;
 

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.beloved.LandingPage;
+import com.example.beloved.MainActivity;
 import com.example.beloved.MyProfile;
 import com.example.beloved.R;
 import com.example.beloved.databinding.FragmentHomeBinding;
@@ -68,14 +69,14 @@ public class Profile extends Fragment {
         TextView emailView = view.findViewById(R.id.username);
 
         Button logout = view.findViewById(R.id.logout);
-        logout.setVisibility(currentUser != null? View.GONE : View.VISIBLE);
+        logout.setVisibility(currentUser != null? View.VISIBLE : View.GONE);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentUser != null) {
                     FirebaseAuth.getInstance().signOut();
-                    Intent logout = new Intent(getActivity(), LandingPage.class);
+                    Intent logout = new Intent(getActivity(), MainActivity.class);
                     startActivity(logout);
                 } else {
                     Toast.makeText(getActivity(), "You are not signed in", Toast.LENGTH_SHORT).show();
