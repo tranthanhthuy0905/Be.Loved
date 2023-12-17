@@ -116,8 +116,8 @@ public class SignUp extends AppCompatActivity {
                         if (user != null) {
                             String userId = user.getUid();
                             String db_url = getResources().getString(R.string.db_url);
-                            userDbRef = FirebaseDatabase.getInstance(db_url).getReference("user");
-                            User createUser = new User(username, (long) phoneNumber, email);
+                            userDbRef = FirebaseDatabase.getInstance(db_url).getReference("users");
+                            User createUser = new User(username, phoneNumber.toString(), email);
                             userDbRef.child(userId).setValue(createUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
