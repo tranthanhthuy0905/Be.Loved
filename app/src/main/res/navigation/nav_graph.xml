@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/chat_fragment"
-        android:name="com.example.beloved.fragments.Chat"
+        android:name="com.example.beloved.fragments.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat"/>
 

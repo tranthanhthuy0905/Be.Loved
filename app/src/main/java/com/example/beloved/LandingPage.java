@@ -17,7 +17,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.beloved.fragments.Cart;
-import com.example.beloved.fragments.Chat;
+import com.example.beloved.fragments.ChatFragment;
 import com.example.beloved.fragments.Favs;
 import com.example.beloved.fragments.Home;
 import com.example.beloved.fragments.Profile;
