@@ -21,11 +21,11 @@
         android:label="Chat"
         tools:layout="@layout/fragment_chat"/>
 
-    <fragment
-        android:id="@+id/favs_fragment"
-        android:name="com.example.beloved.fragments.Favs"
-        android:label="Wishlist"
-        tools:layout="@layout/fragment_favs" />
+<!--    <fragment-->
+<!--        android:id="@+id/favs_fragment"-->
+<!--        android:name="com.example.beloved.fragments.Favs"-->
+<!--        android:label="Wishlist"-->
+<!--        tools:layout="@layout/fragment_favs" />-->
 
     <fragment
         android:id="@+id/profile_fragment"

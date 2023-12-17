@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beloved.LandingPage;
 import com.example.beloved.R;
+import com.example.beloved.fragments.Home;
 import com.example.beloved.models.Post;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -129,7 +130,7 @@ public class CreateItem extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent intent = new Intent(CreateItem.this, LandingPage.class);
+                        Intent intent = new Intent(CreateItem.this, Home.class);
                         CreateItem.this.startActivity(intent);
                         CreateItem.this.finish();
                         Toast.makeText(CreateItem.this, "Create post successfully", Toast.LENGTH_SHORT).show();

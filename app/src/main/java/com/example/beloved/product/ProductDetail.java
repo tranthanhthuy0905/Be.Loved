@@ -21,6 +21,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public class ProductDetail extends AppCompatActivity {
 
     private ImageView back;
@@ -43,7 +45,7 @@ public class ProductDetail extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
 
@@ -53,49 +55,50 @@ public class ProductDetail extends AppCompatActivity {
         String storage_url = getResources().getString(R.string.storage_url);
 
         Intent intent = getIntent();
-        String post_id = intent.getStringExtra("post_id");
+        String post_id =  intent.getStringExtra("post_id");
+        Log.d("PROD_DETAIL", "item key" + post_id);
+        if (post_id == null) {
+            this.finishActivity(0);
+        } else {
+            DatabaseReference post = postDbRef.child(post_id);
+            post.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String title = dataSnapshot.child("title").getValue(String.class);
+                        String desc = dataSnapshot.child("description").getValue(String.class);
+                        String price = dataSnapshot.child("price").getValue(String.class);
+                        String created_at = dataSnapshot.child("created_at").getValue(String.class);
+                        String img_url = dataSnapshot.child("image_url").getValue(String.class);
 
-        DatabaseReference post = postDbRef.child(post_id);
-
-        titleTV = (TextView) findViewById(R.id.prod_title);
-        descTV = (TextView) findViewById(R.id.prod_desc);
-        created_atTV = (TextView) findViewById(R.id.created_at);
-        priceTV =  (TextView) findViewById(R.id.price_val);
-        prod_imgIV = (ImageView) findViewById(R.id.prod_img);
-
-        post.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String title = dataSnapshot.child("title").getValue(String.class);
-                    String desc = dataSnapshot.child("description").getValue(String.class);
-                    String price = dataSnapshot.child("price").getValue(String.class);
-                    String created_at = dataSnapshot.child("created_at").getValue(String.class);
-                    String img_url = dataSnapshot.child("image_url").getValue(String.class);
-
-                    titleTV.setText(title.substring(0, 1).toUpperCase() + title.substring(1));
-                    descTV.setText(desc.substring(0, 1).toUpperCase() + desc.substring(1));
-                    priceTV.setText(price);
-                    created_atTV.setText(created_at);
-                    imageRef = FirebaseStorage.getInstance(storage_url).getReference("products").child(img_url);
-                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Picasso.get().load(uri.toString()).into(prod_imgIV);
+                        titleTV.setText(title.substring(0, 1).toUpperCase() + title.substring(1));
+                        descTV.setText(desc.substring(0, 1).toUpperCase() + desc.substring(1));
+                        priceTV.setText(price);
+                        created_atTV.setText(created_at);
+                        try {
+                            Picasso.get().load(img_url).into(prod_imgIV);
+                        } catch (Exception e) {
+                            prod_imgIV.setImageResource(R.drawable.placeholder);
+                            Log.d("PRODUCT DETAIL","cannot retrieve image for product");
                         }
-                    });
 
-                } else {
-                    // Handle the case where the user with the specified ID doesn't exist
-                    Log.d("FirebaseData", "Post not found with ID: " + post_id);
+                    } else {
+                        // Handle the case where the user with the specified ID doesn't exist
+                        Log.d("FirebaseData", "Post not found with ID: " + post_id);
+                    }
                 }
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+            titleTV = (TextView) findViewById(R.id.prod_title);
+            descTV = (TextView) findViewById(R.id.prod_desc);
+            created_atTV = (TextView) findViewById(R.id.created_at);
+            priceTV =  (TextView) findViewById(R.id.price_val);
+            prod_imgIV = (ImageView) findViewById(R.id.prod_img);
+        }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
     }
 }
 

@@ -19,6 +19,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -54,5 +58,6 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
     implementation("com.firebaseui:firebase-ui-database:7.2.2")
     implementation("com.firebaseui:firebase-ui-database:8.0.1")
-
+    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
 }
