@@ -23,6 +23,8 @@ import com.example.beloved.fragments.Chat;
 import com.example.beloved.models.productItem;
 import com.example.beloved.product.CreateItem;
 import com.example.beloved.models.Post;
+import com.example.beloved.product.ProductDetail;
+import com.example.beloved.product.Rating;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -92,8 +94,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewHold
                     if (context != null) {
                         int pos = getAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
-                            //to be specified later
-                            Intent intent = new Intent(context, CreateItem.class);
+                            final Post prod = prodList.get(pos);
+                            Intent intent = new Intent(context, ProductDetail.class);
+                            intent.putExtra("prod_title", prod.getTitle());
+                            intent.putExtra("prod_price", prod.getPrice());
+                            intent.putExtra("prod_img", prod.getImage_url());
+                            intent.putExtra("prod_desc", prod.getDescription());
+                            intent.putExtra("prod_created", prod.getCreated_at());
                             context.startActivity(intent);
                         }
                     }

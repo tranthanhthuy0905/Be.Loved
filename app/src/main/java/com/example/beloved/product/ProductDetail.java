@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -67,23 +68,25 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String title = dataSnapshot.child("title").getValue(String.class);
-                    String desc = dataSnapshot.child("description").getValue(String.class);
-                    String price = dataSnapshot.child("price").getValue(String.class);
-                    String created_at = dataSnapshot.child("created_at").getValue(String.class);
-                    String img_url = dataSnapshot.child("image_url").getValue(String.class);
+                    String title = intent.getStringExtra("prod_title");
+                    String desc = intent.getStringExtra("prod_desc");
+                    String price = intent.getStringExtra("prod_price");
+                    String created_at = intent.getStringExtra("prod_created");
+                    String img_url = intent.getStringExtra("prod_img");
 
                     titleTV.setText(title.substring(0, 1).toUpperCase() + title.substring(1));
                     descTV.setText(desc.substring(0, 1).toUpperCase() + desc.substring(1));
                     priceTV.setText(price);
                     created_atTV.setText(created_at);
-                    imageRef = FirebaseStorage.getInstance(storage_url).getReference("products").child(img_url);
-                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Picasso.get().load(uri.toString()).into(prod_imgIV);
-                        }
-                    });
+                    Picasso.get().load(img_url).into(prod_imgIV);
+//                    imageRef = FirebaseStorage.getInstance(storage_url).getReference("products").child("images/37488527-fd7a-496e-8c39-bda0f68cab3d");
+//                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            Picasso.get().load(uri.toString()).into(prod_imgIV);
+//                            Toast.makeText(ProductDetail.this, "Successful" + uri, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
 
                 } else {
                     // Handle the case where the user with the specified ID doesn't exist
