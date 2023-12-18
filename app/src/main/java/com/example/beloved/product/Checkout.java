@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.beloved.MainActivity;
 import com.example.beloved.R;
 import com.example.beloved.adapters.ProductAdapter;
+import com.example.beloved.models.Post;
 import com.example.beloved.models.productItem;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 public class Checkout extends AppCompatActivity {
     private Button continueBtn;
     private ImageView back;
-    ArrayList<productItem> productList;
+    ArrayList<Post> productList;
     ProductAdapter adapter;
     ListView orderView;
     @Override
@@ -45,7 +46,6 @@ public class Checkout extends AppCompatActivity {
 
         if (orderItemList != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
             OrderAdapter orderAdapter = new OrderAdapter(orderItemList);
             recyclerView.setAdapter(orderAdapter);
         }

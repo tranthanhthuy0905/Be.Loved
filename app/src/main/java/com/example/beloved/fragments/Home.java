@@ -1,88 +1,117 @@
 package com.example.beloved.fragments;
 
+import static android.widget.GridLayout.HORIZONTAL;
+
+import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsetsController;
+import android.widget.EditText;
+import androidx.appcompat.widget.SearchView;
 
-import com.example.beloved.HomePage;
+import com.example.beloved.MainActivity;
 import com.example.beloved.R;
+import com.example.beloved.adapters.PostAdapter;
 import com.example.beloved.adapters.ProductAdapter;
-import com.example.beloved.models.productItem;
+import com.example.beloved.databinding.FragmentHomeBinding;
+import com.example.beloved.models.Post;
 import com.example.beloved.product.CreateItem;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.database.SnapshotParser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Home extends Fragment {
 
-    ArrayList<productItem> productList;
+    ArrayList<Post> productList;
+    PostAdapter postAdapter;
     ProductAdapter adapter;
     RecyclerView prodLayout;
+    FragmentHomeBinding binding;
+    private static final String TAG = "Home";
+    FirebaseDatabase db;
+    DatabaseReference dataRef;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        prodLayout = getView().findViewById (R.id.productView);
-
-//        productList = new ArrayList<>();
-//        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.elegant_young_woman_dress_with_crossed_hands_handbag_room,"9.99"));
-//        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.elegant_woman_posing_classic_suit,"9.99"));
-//        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-//        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.beautiful_lady_trench_coat_black_shoes_heels_standing_dreamily_looking_aside,"9.99"));
-//        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.sample_watch,"9.99"));
-//        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-//        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.beautiful_lady_trench_coat_black_shoes_heels_standing_dreamily_looking_aside,"9.99"));
-//        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.sample_watch,"9.99"));
-//        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-//
-//        adapter = new ProductAdapter(productList, getContext());
-//        prodLayout.setAdapter(adapter);
-//        prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 3));
-//
-//        //add post creation Floating Action Button
-//        FloatingActionButton createBtn = getView().findViewById(R.id.createPost_FAB);
-//        createBtn.setOnClickListener((v -> {
-//            Intent intent = new Intent(getContext(), CreateItem.class);
-//            Home.this.startActivity(intent);
-//        }
-//        ));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        String db_url = getResources().getString(R.string.db_url);
+        db = FirebaseDatabase.getInstance(db_url);
+        dataRef = db.getReference("products");
         productList = new ArrayList<>();
-        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.elegant_young_woman_dress_with_crossed_hands_handbag_room,"9.99"));
-        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.elegant_woman_posing_classic_suit,"9.99"));
-        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.beautiful_lady_trench_coat_black_shoes_heels_standing_dreamily_looking_aside,"9.99"));
-        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.sample_watch,"9.99"));
-        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-        productList.add(new productItem(1, "Sample 1", "This is a 100% new dress.", R.drawable.beautiful_lady_trench_coat_black_shoes_heels_standing_dreamily_looking_aside,"9.99"));
-        productList.add(new productItem(2, "Sample 2", "This is a 100% new dress.", R.drawable.sample_watch,"9.99"));
-        productList.add(new productItem(3, "Sample 3", "This is a 100% new dress.", R.drawable.sample_top,"19.99"));
-
-        // Assign product list to ItemAdapter
-        adapter = new ProductAdapter(productList, getContext());
-        // Set the LayoutManager that
-        // this RecyclerView will use.
-        prodLayout = view.findViewById(R.id.productView);
+        prodLayout = binding.getRoot().findViewById(R.id.productView);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        prodLayout.setLayoutManager(layoutManager);
+        adapter = new ProductAdapter(productList, getActivity());
         prodLayout.setAdapter(adapter);
-        prodLayout.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList = new ArrayList<>();
+                for (DataSnapshot item: snapshot.getChildren()) {
+                    Post p = item.getValue(Post.class);
+                    p.setKey(item.getKey());
+                    Log.d("CART product getter:", item.getKey() + "" + p.getTitle());
+                    productList.add(p);
+                    adapter.addPost(p);
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "Firebase Data Listener", error.toException());
+            }
+        });
+
         FloatingActionButton createBtn = view.findViewById(R.id.createPost_FAB);
         createBtn.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -91,8 +120,6 @@ public class Home extends Fragment {
                 startActivity(intent);
             }}
         ));
-
-        // adapter instance is set to the
-        // recyclerview to inflate the items.
     }
 }
+
