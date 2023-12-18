@@ -7,15 +7,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.beloved.HomePage;
 import com.example.beloved.LandingPage;
 import com.example.beloved.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -71,10 +70,20 @@ public class SignIn extends AppCompatActivity {
                 }
                 String emailStr = email.getText().toString();
                 String passwordStr = password.getText().toString();
+                if (passwordStr == null || passwordStr.isEmpty()){
+                    Toast.makeText(SignIn.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                }
                 loginUser(emailStr, passwordStr);
             }}
-
         );
+
+        ImageButton backBtn = findViewById(R.id.back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
     }
 
     private void loginUser(String email, String password) {
