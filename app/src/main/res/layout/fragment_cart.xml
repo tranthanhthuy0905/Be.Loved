@@ -1,21 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Cart">
+    tools:context=".fragments.Home">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/menu_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CART" />
+        android:layout_height="wrap_content"
+        android:background="@color/md_theme_dark_inverseSurface"
+        android:gravity="left"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tenor_sans"
+            android:paddingBottom="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:text="Your Cart"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/menu_bar" />
 
     <Button
-        android:id="@+id/checkoutBtn"
-        android:layout_width="138dp"
+        android:id="@+id/checkout"
+        style="@style/Widget.App.FloatingActionButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Checkout" />
-
-</FrameLayout>
+        android:background="@color/md_theme_dark_inverseOnSurface"
+        android:clickable="true"
+        android:text="Checkout"
+        android:textColor="@color/theme_color"
+        app:backgroundTint="@color/md_theme_dark_inverseSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.967" />
+</androidx.constraintlayout.widget.ConstraintLayout>

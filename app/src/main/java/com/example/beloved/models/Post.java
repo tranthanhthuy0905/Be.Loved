@@ -10,9 +10,10 @@ public class Post {
     private String created_at;
     private String price;
     private String status;
-
     private String image_url;
+    private String key;
 
+    Post(){}
     public Post(String title, String description, String image_url, String price, String status) {
         this.title = title;
         this.description = description;
@@ -32,26 +33,40 @@ public class Post {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public String getCreated_at() {
-        return created_at;
+        return this.created_at;
     }
 
     public String getImage_url() {
-        return image_url;
+        return this.image_url;
     }
 
     public String getStatus() {
-        return status;
+        return this.status;
     }
 
     public String getPrice() {
-        return price;
+        return this.price;
     }
+    public String getCreatedAt() {
+        return this.created_at;
+    }
+    public void setCreated_at(String t) {
+        this.created_at = t;
+    }
+    public void setKey(String key) {
+        this.key = key;
+    }
+    public String getKey() {
+        return key;
+    }
+
+
 }

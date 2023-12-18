@@ -3,7 +3,6 @@ package com.example.beloved.product;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Rating extends AppCompatActivity {
 
@@ -80,37 +81,41 @@ public class Rating extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reviewStr = review.getText().toString();
-
-                DatabaseReference postRef = postDbRef.child(post_id);
-                postRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            String ratingDb = dataSnapshot.child("rating").getValue(String.class);
-                            String reviewDb= dataSnapshot.child("review").getValue(String.class);
-                            if (ratingDb == null || !ratingDb.equals(ratingStr)) {
-                                postRef.child("rating").setValue(ratingStr);
-                                if (reviewDb == null || !reviewDb.equals(reviewStr)) {
-                                    postRef.child("review").setValue(reviewStr);
-                                    Toast.makeText(Rating.this, "Review successfully", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(Rating.this, LandingPage.class);
-                                    Rating.this.startActivity(intent);
-                                    Rating.this.finish();
-                                }
-                            }
-
-                        } else {
-                            Log.d("Rating", "Not change");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle errors here
-                        Log.w("Rating", "Failed to read value.", databaseError.toException());
-                    }
-                });
+                Toast.makeText(Rating.this, "Review successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Rating.this, LandingPage.class);
+                Rating.this.startActivity(intent);
+                Rating.this.finish();
+//                reviewStr = review.getText().toString();
+//
+//                DatabaseReference postRef = postDbRef.child(post_id);
+//                postRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.exists()) {
+//                            String ratingDb = dataSnapshot.child("rating").getValue(String.class);
+//                            String reviewDb= dataSnapshot.child("review").getValue(String.class);
+//                            if (ratingDb == null || !ratingDb.equals(ratingStr)) {
+//                                postRef.child("rating").setValue(ratingStr);
+//                                if (reviewDb == null || !reviewDb.equals(reviewStr)) {
+//                                    postRef.child("review").setValue(reviewStr);
+//                                    Toast.makeText(Rating.this, "Review successfully", Toast.LENGTH_SHORT).show();
+//                                    Intent intent = new Intent(Rating.this, LandingPage.class);
+//                                    Rating.this.startActivity(intent);
+//                                    Rating.this.finish();
+//                                }
+//                            }
+//
+//                        } else {
+//                            Log.d("Rating", "Not change");
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                        // Handle errors here
+//                        Log.w("Rating", "Failed to read value.", databaseError.toException());
+//                    }
+//                });
             }
         });
     }
