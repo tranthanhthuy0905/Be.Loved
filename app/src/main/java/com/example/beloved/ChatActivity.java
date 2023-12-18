@@ -38,9 +38,6 @@ public class ChatActivity extends AppCompatActivity {
     String chatroomId;
     ChatroomModel chatroomModel;
     ChatRecyclerAdapter adapter;
-
-public class ChatActivity extends AppCompatActivity {
-    User otherUser;
     EditText messageInput;
     ImageButton sendMessageBtn;
     ImageButton backBtn;
@@ -55,6 +52,7 @@ public class ChatActivity extends AppCompatActivity {
 
         otherUser = AndroidUtil.getUserModelFromIntent(getIntent());
         chatroomId = FirebaseUtil.getChatroomId(FirebaseUtil.currentUserId(),otherUser.getUid());
+
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);
         backBtn = findViewById(R.id.back_btn);
@@ -168,5 +166,5 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
     }
-    }
+
 }
