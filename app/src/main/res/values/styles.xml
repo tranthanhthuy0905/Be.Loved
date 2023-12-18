@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:checkboxStyle">@style/ConditionCheckbox</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="ConditionCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">#704F38</item>
+    </style>
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedSquare">
+        <item name="cornerSize">20%</item>
+    </style>
+
+    <style name="CornerCut">
+        <item name="cornerSize">15dp</item>
+        <item name="cornerFamily">cut</item>
+    </style>
+
+    <style name="DiamondCut">
+        <item name="cornerSize">75dp</item>
+        <item name="cornerFamily">cut</item>
+    </style>
+
+    <style name="SpecificCornerCut">
+        <item name="cornerSizeTopRight">75dp</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerSizeBottomLeft">75dp</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+    </style>
+
+    <style name="SpecificCornerRounded">
+        <item name="cornerSizeTopRight">75dp</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeBottomLeft">75dp</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+    </style>
+
+    <style name="ThemeOverlay.App.FloatingActionButton" parent="">
+        <item name="colorSecondary">@color/theme_color</item>
+        <item name="colorOnSecondary">@color/theme_color</item>
+        <item name="colorOnSurface">@color/md_theme_dark_inverseOnSurface</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorOnPrimary">@color/md_theme_dark_inversePrimary</item>
+        <item name="colorPrimary">@color/md_theme_dark_inverseSurface</item>
+    </style>
+
+    <style name="Widget.App.CheckBox" parent="">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.CheckBox" parent="">
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorOnPrimary">#EB8A8A</item>
+    </style>
+
+</resources>
