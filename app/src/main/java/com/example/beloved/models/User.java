@@ -15,6 +15,7 @@ public class User {
     public void setFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
     }
+
     public String getUid() {
         return uid;
     }

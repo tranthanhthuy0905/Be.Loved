@@ -81,8 +81,7 @@ public class CreateItem extends AppCompatActivity {
         postDbRef = FirebaseDatabase.getInstance(db_url).getReference("products");
         String storage_url = getResources().getString(R.string.storage_url);
         storageRef = FirebaseStorage.getInstance(storage_url).getReference("products");
-        selectedImgStr = "images/" + UUID.randomUUID().toString();
-        imageRef = storageRef.child(selectedImgStr);
+        imageRef = storageRef.child("images/" + UUID.randomUUID().toString());
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +101,12 @@ public class CreateItem extends AppCompatActivity {
             task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Log.d("Successful image upload", "Post");
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            selectedImgStr = uri.toString();
+                        }
+                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -130,10 +134,10 @@ public class CreateItem extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Intent intent = new Intent(CreateItem.this, Home.class);
+                        Toast.makeText(CreateItem.this, "Create post successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CreateItem.this, LandingPage.class);
                         CreateItem.this.startActivity(intent);
                         CreateItem.this.finish();
-                        Toast.makeText(CreateItem.this, "Create post successfully", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
